@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Package Version="5">
+    <Name Value="NDXSQLite"/>
+    <Type Value="RunAndDesignTime"/>
+    <Author Value="Nicolas DEOUX - NDXDev 2025"/>
+    <CompilerOptions>
+      <Version Value="11"/>
+      <SearchPaths>
+        <IncludeFiles Value="$(ProjOutDir)"/>
+        <OtherUnitFiles Value="core;api;database;async;pool;factory;health;advanced;statement;dataset;query;utils"/>
+        <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
+      </SearchPaths>
+      <Parsing>
+        <SyntaxOptions>
+          <SyntaxMode Value="ObjFPC"/>
+        </SyntaxOptions>
+      </Parsing>
+    </CompilerOptions>
+    <Description Value="NDXSQLite - Native SQLite Connector for Lazarus
+Native SQLite3 C API - No SQLDB dependency
+
+Features:
+- Synchronous and asynchronous connections
+- Thread-safe connection pool
+- Transaction support with savepoints
+- CancellationToken for async operations
+- Full-Text Search (FTS5)
+- JSON support (SQLite 3.38+)
+- Schema migrations
+- Backup API
+- Health check and maintenance
+- TDataSet compatible
+- User-Defined Functions (UDF)
+- Custom collations
+- BLOB streaming
+- R-Tree spatial indexing
+- Virtual tables
+- Custom authorizers
+- Preupdate hooks
+- Unlock notify"/>
+    <License Value="MIT License"/>
+    <Version Major="1" Minor="0" Release="0" Build="0"/>
+    <Files Count="37">
+      <Item1>
+        <Filename Value="api/ndxsqlite3api.pas"/>
+        <UnitName Value="ndxsqlite3api"/>
+      </Item1>
+      <Item2>
+        <Filename Value="core/ndxsqlitetypes.pas"/>
+        <UnitName Value="ndxsqlitetypes"/>
+      </Item2>
+      <Item3>
+        <Filename Value="core/ndxsqliteexceptions.pas"/>
+        <UnitName Value="ndxsqliteexceptions"/>
+      </Item3>
+      <Item4>
+        <Filename Value="core/ndxsqliteplatform.pas"/>
+        <UnitName Value="ndxsqliteplatform"/>
+      </Item4>
+      <Item5>
+        <Filename Value="core/ndxsqliteconnectionoptions.pas"/>
+        <UnitName Value="ndxsqliteconnectionoptions"/>
+      </Item5>
+      <Item6>
+        <Filename Value="core/ndxsqliteconnectionintf.pas"/>
+        <UnitName Value="ndxsqliteconnectionintf"/>
+      </Item6>
+      <Item7>
+        <Filename Value="core/ndxsqliteconnection.pas"/>
+        <UnitName Value="ndxsqliteconnection"/>
+      </Item7>
+      <Item8>
+        <Filename Value="database/ndxsqlitedatabase.pas"/>
+        <UnitName Value="ndxsqlitedatabase"/>
+      </Item8>
+      <Item9>
+        <Filename Value="statement/ndxsqlitestatement.pas"/>
+        <UnitName Value="ndxsqlitestatement"/>
+      </Item9>
+      <Item10>
+        <Filename Value="dataset/ndxsqlitedataset.pas"/>
+        <UnitName Value="ndxsqlitedataset"/>
+      </Item10>
+      <Item11>
+        <Filename Value="query/ndxsqlitequery.pas"/>
+        <UnitName Value="ndxsqlitequery"/>
+      </Item11>
+      <Item12>
+        <Filename Value="async/ndxsqliteasynctypes.pas"/>
+        <UnitName Value="ndxsqliteasynctypes"/>
+      </Item12>
+      <Item13>
+        <Filename Value="async/ndxsqlitecancellation.pas"/>
+        <UnitName Value="ndxsqlitecancellation"/>
+      </Item13>
+      <Item14>
+        <Filename Value="async/ndxsqliteasyncworker.pas"/>
+        <UnitName Value="ndxsqliteasyncworker"/>
+      </Item14>
+      <Item15>
+        <Filename Value="async/ndxsqliteasyncconnection.pas"/>
+        <UnitName Value="ndxsqliteasyncconnection"/>
+      </Item15>
+      <Item16>
+        <Filename Value="factory/ndxsqliteconnectionfactory.pas"/>
+        <UnitName Value="ndxsqliteconnectionfactory"/>
+      </Item16>
+      <Item17>
+        <Filename Value="pool/ndxsqliteconnectionpool.pas"/>
+        <UnitName Value="ndxsqliteconnectionpool"/>
+      </Item17>
+      <Item18>
+        <Filename Value="health/ndxsqlitehealthcheck.pas"/>
+        <UnitName Value="ndxsqlitehealthcheck"/>
+      </Item18>
+      <Item19>
+        <Filename Value="advanced/ndxsqlitefts.pas"/>
+        <UnitName Value="ndxsqlitefts"/>
+      </Item19>
+      <Item20>
+        <Filename Value="advanced/ndxsqlitejson.pas"/>
+        <UnitName Value="ndxsqlitejson"/>
+      </Item20>
+      <Item21>
+        <Filename Value="advanced/ndxsqlitemigration.pas"/>
+        <UnitName Value="ndxsqlitemigration"/>
+      </Item21>
+      <Item22>
+        <Filename Value="advanced/ndxsqlitebackup.pas"/>
+        <UnitName Value="ndxsqlitebackup"/>
+      </Item22>
+      <Item23>
+        <Filename Value="advanced/ndxsqliteverify.pas"/>
+        <UnitName Value="ndxsqliteverify"/>
+      </Item23>
+      <Item24>
+        <Filename Value="advanced/ndxsqlitedump.pas"/>
+        <UnitName Value="ndxsqlitedump"/>
+      </Item24>
+      <Item25>
+        <Filename Value="advanced/ndxsqlitecsv.pas"/>
+        <UnitName Value="ndxsqlitecsv"/>
+      </Item25>
+      <Item26>
+        <Filename Value="advanced/ndxsqliteattached.pas"/>
+        <UnitName Value="ndxsqliteattached"/>
+      </Item26>
+      <Item27>
+        <Filename Value="advanced/ndxsqliteudf.pas"/>
+        <UnitName Value="ndxsqliteudf"/>
+      </Item27>
+      <Item28>
+        <Filename Value="advanced/ndxsqlitecollation.pas"/>
+        <UnitName Value="ndxsqlitecollation"/>
+      </Item28>
+      <Item29>
+        <Filename Value="advanced/ndxsqliteblob.pas"/>
+        <UnitName Value="ndxsqliteblob"/>
+      </Item29>
+      <Item30>
+        <Filename Value="advanced/ndxsqliteertree.pas"/>
+        <UnitName Value="ndxsqliteertree"/>
+      </Item30>
+      <Item31>
+        <Filename Value="advanced/ndxsqlitevtab.pas"/>
+        <UnitName Value="ndxsqlitevtab"/>
+      </Item31>
+      <Item32>
+        <Filename Value="advanced/ndxsqliteauthorizer.pas"/>
+        <UnitName Value="ndxsqliteauthorizer"/>
+      </Item32>
+      <Item33>
+        <Filename Value="advanced/ndxsqliteunlocknotify.pas"/>
+        <UnitName Value="ndxsqliteunlocknotify"/>
+      </Item33>
+      <Item34>
+        <Filename Value="advanced/ndxsqlitepreupdate.pas"/>
+        <UnitName Value="ndxsqlitepreupdate"/>
+      </Item34>
+      <Item35>
+        <Filename Value="NDXSQLite.pas"/>
+        <UnitName Value="NDXSQLite"/>
+      </Item35>
+      <Item36>
+        <Filename Value="utils/ndxsqlitedatetimeutils.pas"/>
+        <UnitName Value="ndxsqlitedatetimeutils"/>
+      </Item36>
+      <Item37>
+        <Filename Value="core/ndxsqliteversion.pas"/>
+        <UnitName Value="ndxsqliteversion"/>
+      </Item37>
+    </Files>
+    <RequiredPkgs Count="1">
+      <Item1>
+        <PackageName Value="LazUtils"/>
+      </Item1>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+      <UseFileFilters Value="True"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>
