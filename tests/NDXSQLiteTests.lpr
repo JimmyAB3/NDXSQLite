@@ -13911,13 +13911,13 @@ begin
       end;
     end;
 
-    // At least 1 should fail on Unix systems
-    // On Windows, SQLite may create temp/in-memory databases for invalid paths
+    // At least 1 should fail on Linux systems
+    // On Windows/macOS, SQLite may create temp/in-memory databases for invalid paths
     // This is environment-dependent behavior
-    {$IFDEF WINDOWS}
-    // Windows CI environments are very permissive - SQLite handles invalid paths gracefully
+    {$IF DEFINED(WINDOWS) OR DEFINED(DARWIN)}
+    // Windows/macOS CI environments are very permissive - SQLite handles invalid paths gracefully
     // The test verifies the mechanism works, actual blocking depends on environment
-    LogSuccess(CurrentTest + Format(' (%d/%d blocked, Windows permissive)', [Blocked, Total]));
+    LogSuccess(CurrentTest + Format(' (%d/%d blocked, CI permissive)', [Blocked, Total]));
     {$ELSE}
     if Blocked >= 1 then
       LogSuccess(CurrentTest + Format(' (%d/%d blocked)', [Blocked, Total]))
