@@ -19,10 +19,10 @@ program JSONSupport;
 uses
   {$IFDEF UNIX}cthreads,{$ENDIF}
   Classes, SysUtils, DB,
-  ndxsqliteconnection, ndxsqliteconnectionintf, ndxsqlitejson;
+  ndxsqliteconnection, ndxsqlitejson;
 
 var
-  Conn: INDXSQLiteConnection;
+  Conn: TNDXSQLiteConnection;
   JSON: TNDXSQLiteJSON;
   DataSet: TDataSet;
   DBPath: string;
@@ -212,7 +212,7 @@ begin
   end;
 
   Conn.Close;
-  Conn := nil;
+  Conn.Free;
 
   WriteLn('=== Example completed successfully! ===');
 
