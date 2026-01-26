@@ -270,5 +270,63 @@ jobs:
           draft: false
           prerelease: false
           generate_release_notes: true
+          body: |
+            ## Quick Start
+
+            ### Option 1: Use in a single project (no IDE installation)
+
+            1. Extract the zip somewhere (e.g., `C:\libs\NDXSQLite` or `~/libs/NDXSQLite`)
+            2. In Lazarus: **Project > Project Options > Compiler Options > Paths**
+            3. Add to "Other unit files":
+               ```
+               path/to/NDXSQLite/src
+               path/to/NDXSQLite/src/core
+               path/to/NDXSQLite/src/api
+               path/to/NDXSQLite/src/advanced
+               path/to/NDXSQLite/src/pool
+               ```
+            4. In your code: `uses ndxsqliteconnection;`
+            5. Done!
+
+            ### Option 2: Install globally in Lazarus IDE
+
+            1. Open Lazarus
+            2. **Package > Open Package File** → select `src/NDXSQLite.lpk`
+            3. Click **Compile**
+            4. Click **Use > Install**
+            5. Lazarus restarts once, then available in all projects
+
+            ### Option 3: Command line only (no IDE)
+
+            ```bash
+            fpc -Fu"path/to/NDXSQLite/src" -Fu"path/to/NDXSQLite/src/core" -Fu"path/to/NDXSQLite/src/api" myprogram.pas
+            ```
+
+            ## First Program
+
+            ```pascal
+            uses ndxsqliteconnection;
+            var
+              DB: TNDXSQLiteConnection;
+            begin
+              DB := TNDXSQLiteConnection.Create('test.db');
+              DB.Open;
+              DB.ExecuteNonQuery('CREATE TABLE demo (id INTEGER PRIMARY KEY, name TEXT)');
+              DB.ExecuteNonQuery('INSERT INTO demo (name) VALUES (?)', ['Hello']);
+              WriteLn(DB.ExecuteScalar('SELECT name FROM demo'));
+              DB.Free;
+            end.
+            ```
+
+            ## Documentation
+
+            - [Quick Start Guide](docs/QUICKSTART.md) - Detailed tutorial
+            - [API Reference](docs/API.md) - All classes and methods
+            - [Examples](examples/) - 149 console + 10 GUI examples
+
+            ## Requirements
+
+            - Free Pascal 3.2.0+ or Lazarus 2.0+
+            - SQLite library (auto-detected on most systems)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
