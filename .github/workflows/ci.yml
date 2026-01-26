@@ -43,7 +43,8 @@ jobs:
             libsqlite3-0 \
             libsqlite3-dev \
             libgtk2.0-0 \
-            libgtk2.0-dev
+            libgtk2.0-dev \
+            xvfb
 
       - name: Install dependencies (Windows)
         if: matrix.platform == 'windows'
@@ -93,8 +94,18 @@ jobs:
           lazbuild SQLCipherTests.lpi
 
       # ========== Run Tests ==========
-      - name: Run tests (Unix)
-        if: matrix.platform != 'windows'
+      - name: Run tests (Linux)
+        if: matrix.platform == 'linux'
+        run: |
+          cd tests
+          echo "=== NDXSQLiteTests ===" && xvfb-run -a ./NDXSQLiteTests
+          echo "=== NDXSQLiteAdvancedTests ===" && xvfb-run -a ./NDXSQLiteAdvancedTests
+          echo "=== DateTimeUtilsTests ===" && xvfb-run -a ./DateTimeUtilsTests --all --format=plain
+          echo "=== DateTimeUtilsFunctionalTests ===" && xvfb-run -a ./DateTimeUtilsFunctionalTests --all --format=plain
+          echo "=== SQLCipherTests (basic - SQLCipher not installed) ===" && xvfb-run -a ./SQLCipherTests
+
+      - name: Run tests (macOS)
+        if: matrix.platform == 'macos'
         run: |
           cd tests
           echo "=== NDXSQLiteTests ===" && ./NDXSQLiteTests
@@ -141,9 +152,11 @@ jobs:
           sudo apt-get install -y \
             libsqlcipher1 libsqlcipher-dev \
             libgtk2.0-0 libgtk2.0-dev \
+            xvfb \
             || sudo apt-get install -y \
             libsqlcipher0 libsqlcipher-dev \
-            libgtk2.0-0 libgtk2.0-dev
+            libgtk2.0-0 libgtk2.0-dev \
+            xvfb
           echo "SQLCipher library:"
           ls -la /usr/lib/x86_64-linux-gnu/libsqlcipher* || true
           sqlcipher --version || echo "sqlcipher CLI not available"
@@ -168,7 +181,7 @@ jobs:
           cd tests
           echo "=== SQLCipherTests (with SQLCipher library) ==="
           # Library search order now prioritizes SQLCipher automatically
-          ./SQLCipherTests
+          xvfb-run -a ./SQLCipherTests
 
   # Build examples to ensure they compile
   build-examples:
