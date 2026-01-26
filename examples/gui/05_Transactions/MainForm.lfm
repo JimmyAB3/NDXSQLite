@@ -1,0 +1,268 @@
+object frmMain: TfrmMain
+  Left = 200
+  Height = 700
+  Top = 50
+  Width = 1100
+  Caption = 'NDXSQLite Transaction Management Demo'
+  ClientHeight = 700
+  ClientWidth = 1100
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  Position = poScreenCenter
+  LCLVersion = '3.4.0.0'
+  object pnlLeft: TPanel
+    Left = 0
+    Height = 700
+    Top = 0
+    Width = 280
+    Align = alLeft
+    BevelOuter = bvNone
+    ClientHeight = 700
+    ClientWidth = 280
+    TabOrder = 0
+    object gbTransactionControl: TGroupBox
+      Left = 8
+      Height = 140
+      Top = 8
+      Width = 264
+      Anchors = [akTop, akLeft, akRight]
+      Caption = ' Transaction Control '
+      ClientHeight = 120
+      ClientWidth = 260
+      TabOrder = 0
+      object lblTransactionStatus: TLabel
+        Left = 12
+        Height = 20
+        Top = 8
+        Width = 236
+        Alignment = taCenter
+        Anchors = [akTop, akLeft, akRight]
+        AutoSize = False
+        Caption = 'No Active Transaction'
+        Font.Color = clGreen
+        Font.Height = -13
+        ParentFont = False
+      end
+      object btnBeginTransaction: TButton
+        Left = 12
+        Height = 32
+        Top = 36
+        Width = 236
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'BEGIN TRANSACTION'
+        TabOrder = 0
+        OnClick = btnBeginTransactionClick
+      end
+      object btnCommit: TButton
+        Left = 12
+        Height = 32
+        Top = 76
+        Width = 110
+        Caption = 'COMMIT'
+        Enabled = False
+        TabOrder = 1
+        OnClick = btnCommitClick
+      end
+      object btnRollback: TButton
+        Left = 138
+        Height = 32
+        Top = 76
+        Width = 110
+        Anchors = [akTop, akRight]
+        Caption = 'ROLLBACK'
+        Enabled = False
+        TabOrder = 2
+        OnClick = btnRollbackClick
+      end
+    end
+    object gbSavepoints: TGroupBox
+      Left = 8
+      Height = 240
+      Top = 156
+      Width = 264
+      Anchors = [akTop, akLeft, akRight]
+      Caption = ' Savepoints '
+      ClientHeight = 220
+      ClientWidth = 260
+      Enabled = False
+      TabOrder = 1
+      object lblSavepointName: TLabel
+        Left = 12
+        Height = 15
+        Top = 8
+        Width = 94
+        Caption = 'Savepoint name:'
+      end
+      object edtSavepointName: TEdit
+        Left = 12
+        Height = 28
+        Top = 26
+        Width = 160
+        Anchors = [akTop, akLeft, akRight]
+        TabOrder = 0
+        TextHint = '(auto-generated)'
+      end
+      object btnSavepoint: TButton
+        Left = 180
+        Height = 28
+        Top = 26
+        Width = 68
+        Anchors = [akTop, akRight]
+        Caption = 'Create'
+        TabOrder = 1
+        OnClick = btnSavepointClick
+      end
+      object lblSavepointList: TLabel
+        Left = 12
+        Height = 15
+        Top = 62
+        Width = 96
+        Caption = 'Active savepoints:'
+      end
+      object lstSavepoints: TListBox
+        Left = 12
+        Height = 80
+        Top = 80
+        Width = 236
+        Anchors = [akTop, akLeft, akRight]
+        ItemHeight = 0
+        TabOrder = 2
+      end
+      object btnRollbackToSavepoint: TButton
+        Left = 12
+        Height = 28
+        Top = 168
+        Width = 110
+        Caption = 'Rollback To'
+        TabOrder = 3
+        OnClick = btnRollbackToSavepointClick
+      end
+      object btnReleaseSavepoint: TButton
+        Left = 138
+        Height = 28
+        Top = 168
+        Width = 110
+        Anchors = [akTop, akRight]
+        Caption = 'Release'
+        TabOrder = 4
+        OnClick = btnReleaseSavepointClick
+      end
+    end
+    object gbDataOperations: TGroupBox
+      Left = 8
+      Height = 130
+      Top = 404
+      Width = 264
+      Anchors = [akTop, akLeft, akRight]
+      Caption = ' Data Operations '
+      ClientHeight = 110
+      ClientWidth = 260
+      TabOrder = 2
+      object btnInsertRow: TButton
+        Left = 12
+        Height = 28
+        Top = 10
+        Width = 236
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'Insert New Account'
+        TabOrder = 0
+        OnClick = btnInsertRowClick
+      end
+      object btnUpdateRandom: TButton
+        Left = 12
+        Height = 28
+        Top = 44
+        Width = 236
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'Update Random Balance'
+        TabOrder = 1
+        OnClick = btnUpdateRandomClick
+      end
+      object btnDeleteLast: TButton
+        Left = 12
+        Height = 28
+        Top = 78
+        Width = 236
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'Delete Last Account'
+        TabOrder = 2
+        OnClick = btnDeleteLastClick
+      end
+    end
+    object btnClearLog: TButton
+      Left = 8
+      Height = 30
+      Top = 662
+      Width = 264
+      Anchors = [akLeft, akRight, akBottom]
+      Caption = 'Clear Log'
+      TabOrder = 3
+      OnClick = btnClearLogClick
+    end
+  end
+  object Splitter1: TSplitter
+    Left = 280
+    Height = 700
+    Top = 0
+    Width = 5
+  end
+  object pnlRight: TPanel
+    Left = 285
+    Height = 700
+    Top = 0
+    Width = 815
+    Align = alClient
+    BevelOuter = bvNone
+    ClientHeight = 700
+    ClientWidth = 815
+    TabOrder = 1
+    object DBGrid1: TDBGrid
+      Left = 8
+      Height = 280
+      Top = 8
+      Width = 799
+      Anchors = [akTop, akLeft, akRight]
+      DataSource = DataSource1
+      TabOrder = 0
+      TitleFont.Height = -12
+      TitleFont.Name = 'Sans'
+    end
+    object DBNavigator1: TDBNavigator
+      Left = 8
+      Height = 30
+      Top = 296
+      Width = 799
+      Anchors = [akTop, akLeft, akRight]
+      DataSource = DataSource1
+      TabOrder = 1
+    end
+    object memoLog: TMemo
+      Left = 8
+      Height = 330
+      Top = 334
+      Width = 799
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      Font.Height = -12
+      Font.Name = 'Monospace'
+      ParentFont = False
+      ReadOnly = True
+      ScrollBars = ssAutoBoth
+      TabOrder = 2
+      WordWrap = False
+    end
+    object pnlStatus: TPanel
+      Left = 0
+      Height = 28
+      Top = 672
+      Width = 815
+      Align = alBottom
+      BevelOuter = bvLowered
+      TabOrder = 3
+    end
+  end
+  object DataSource1: TDataSource
+    Left = 360
+    Top = 168
+  end
+end

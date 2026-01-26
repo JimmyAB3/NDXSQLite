@@ -1,0 +1,250 @@
+object frmMain: TfrmMain
+  Left = 200
+  Height = 650
+  Top = 50
+  Width = 900
+  Caption = 'NDXSQLite Version Information Demo'
+  ClientHeight = 650
+  ClientWidth = 900
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  LCLVersion = '3.4.0.0'
+  object pnlTop: TPanel
+    Left = 0
+    Height = 350
+    Top = 0
+    Width = 900
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 350
+    ClientWidth = 900
+    TabOrder = 0
+    object gbLibraryVersion: TGroupBox
+      Left = 8
+      Height = 160
+      Top = 8
+      Width = 280
+      Caption = ' NDXSQLite Library '
+      ClientHeight = 140
+      ClientWidth = 276
+      TabOrder = 0
+      object lblVersion: TLabel
+        Left = 12
+        Height = 15
+        Top = 8
+        Width = 252
+        AutoSize = False
+        Caption = 'Version: -'
+        Font.Height = -13
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object lblVersionFull: TLabel
+        Left = 12
+        Height = 15
+        Top = 28
+        Width = 252
+        AutoSize = False
+        Caption = 'Full: -'
+      end
+      object lblMajor: TLabel
+        Left = 12
+        Height = 15
+        Top = 52
+        Width = 80
+        Caption = 'Major: -'
+      end
+      object lblMinor: TLabel
+        Left = 100
+        Height = 15
+        Top = 52
+        Width = 80
+        Caption = 'Minor: -'
+      end
+      object lblPatch: TLabel
+        Left = 188
+        Height = 15
+        Top = 52
+        Width = 80
+        Caption = 'Patch: -'
+      end
+      object lblDate: TLabel
+        Left = 12
+        Height = 15
+        Top = 76
+        Width = 252
+        AutoSize = False
+        Caption = 'Date: -'
+      end
+    end
+    object gbSQLiteVersion: TGroupBox
+      Left = 296
+      Height = 160
+      Top = 8
+      Width = 280
+      Caption = ' SQLite Runtime '
+      ClientHeight = 140
+      ClientWidth = 276
+      TabOrder = 1
+      object lblBuiltFor: TLabel
+        Left = 12
+        Height = 15
+        Top = 8
+        Width = 252
+        AutoSize = False
+        Caption = 'Built for: -'
+      end
+      object lblRuntime: TLabel
+        Left = 12
+        Height = 15
+        Top = 28
+        Width = 252
+        AutoSize = False
+        Caption = 'Runtime: -'
+        Font.Height = -13
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object lblRuntimeNumber: TLabel
+        Left = 12
+        Height = 15
+        Top = 52
+        Width = 252
+        AutoSize = False
+        Caption = 'Version Number: -'
+      end
+      object lblLoaded: TLabel
+        Left = 12
+        Height = 15
+        Top = 76
+        Width = 252
+        AutoSize = False
+        Caption = 'SQLite Loaded: -'
+      end
+      object lblPlatform: TLabel
+        Left = 12
+        Height = 15
+        Top = 100
+        Width = 252
+        AutoSize = False
+        Caption = 'Platform: -'
+      end
+    end
+    object gbFeatureCheck: TGroupBox
+      Left = 584
+      Height = 160
+      Top = 8
+      Width = 308
+      Anchors = [akTop, akLeft, akRight]
+      Caption = ' Feature Check '
+      ClientHeight = 140
+      ClientWidth = 304
+      TabOrder = 2
+      object cboFeature: TComboBox
+        Left = 12
+        Height = 28
+        Top = 12
+        Width = 280
+        Anchors = [akTop, akLeft, akRight]
+        ItemHeight = 0
+        Style = csDropDownList
+        TabOrder = 0
+      end
+      object btnCheckFeature: TButton
+        Left = 12
+        Height = 30
+        Top = 48
+        Width = 280
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'Check Feature Support'
+        TabOrder = 1
+        OnClick = btnCheckFeatureClick
+      end
+      object lblFeatureResult: TLabel
+        Left = 12
+        Height = 20
+        Top = 88
+        Width = 280
+        Alignment = taCenter
+        Anchors = [akTop, akLeft, akRight]
+        AutoSize = False
+        Caption = '-'
+        Font.Height = -15
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+    end
+    object sgFeatures: TStringGrid
+      Left = 8
+      Height = 160
+      Top = 176
+      Width = 884
+      Anchors = [akTop, akLeft, akRight]
+      ColCount = 4
+      FixedCols = 0
+      RowCount = 11
+      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goRowSelect]
+      TabOrder = 3
+      ColWidths = (
+        180
+        100
+        80
+        200
+      )
+    end
+    object btnRefresh: TButton
+      Left = 752
+      Height = 30
+      Top = 176
+      Width = 140
+      Anchors = [akTop, akRight]
+      Caption = 'Refresh'
+      TabOrder = 4
+      OnClick = btnRefreshClick
+    end
+  end
+  object Splitter1: TSplitter
+    Cursor = crVSplit
+    Left = 0
+    Height = 5
+    Top = 350
+    Width = 900
+    Align = alTop
+    ResizeAnchor = akTop
+  end
+  object pnlBottom: TPanel
+    Left = 0
+    Height = 295
+    Top = 355
+    Width = 900
+    Align = alClient
+    BevelOuter = bvNone
+    ClientHeight = 295
+    ClientWidth = 900
+    TabOrder = 1
+    object memoLog: TMemo
+      Left = 8
+      Height = 249
+      Top = 8
+      Width = 884
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      Font.Height = -12
+      Font.Name = 'Monospace'
+      ParentFont = False
+      ReadOnly = True
+      ScrollBars = ssAutoBoth
+      TabOrder = 0
+      WordWrap = False
+    end
+    object btnClearLog: TButton
+      Left = 8
+      Height = 28
+      Top = 263
+      Width = 884
+      Anchors = [akLeft, akRight, akBottom]
+      Caption = 'Clear Log'
+      TabOrder = 1
+      OnClick = btnClearLogClick
+    end
+  end
+end

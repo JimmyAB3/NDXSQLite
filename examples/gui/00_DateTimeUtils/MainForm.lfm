@@ -1,0 +1,378 @@
+object frmMain: TfrmMain
+  Left = 200
+  Height = 720
+  Top = 50
+  Width = 900
+  Caption = 'NDXSQLite DateTime Utilities Demo'
+  ClientHeight = 720
+  ClientWidth = 900
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  LCLVersion = '3.4.0.0'
+  object pnlLeft: TPanel
+    Left = 0
+    Height = 720
+    Top = 0
+    Width = 450
+    Align = alLeft
+    BevelOuter = bvNone
+    ClientHeight = 720
+    ClientWidth = 450
+    TabOrder = 0
+    object gbCurrentTime: TGroupBox
+      Left = 8
+      Height = 130
+      Top = 8
+      Width = 434
+      Anchors = [akTop, akLeft, akRight]
+      Caption = ' Current Time (auto-refresh) '
+      ClientHeight = 110
+      ClientWidth = 430
+      TabOrder = 0
+      object lblLocalNow: TLabel
+        Left = 12
+        Height = 18
+        Top = 10
+        Width = 406
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'Local: ...'
+        Font.Height = -14
+        Font.Name = 'Monospace'
+        ParentFont = False
+      end
+      object lblUtcNow: TLabel
+        Left = 12
+        Height = 18
+        Top = 30
+        Width = 406
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'UTC:   ...'
+        Font.Height = -14
+        Font.Name = 'Monospace'
+        ParentFont = False
+      end
+      object lblIsoUtcNow: TLabel
+        Left = 12
+        Height = 18
+        Top = 50
+        Width = 406
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'ISO:   ...'
+        Font.Height = -14
+        Font.Name = 'Monospace'
+        ParentFont = False
+      end
+      object lblUnixNow: TLabel
+        Left = 12
+        Height = 18
+        Top = 70
+        Width = 406
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'Unix:  ...'
+        Font.Height = -14
+        Font.Name = 'Monospace'
+        ParentFont = False
+      end
+      object lblTimezoneOffset: TLabel
+        Left = 12
+        Height = 18
+        Top = 90
+        Width = 406
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'Timezone: ...'
+        Font.Height = -14
+        Font.Name = 'Monospace'
+        ParentFont = False
+      end
+    end
+    object gbConversions: TGroupBox
+      Left = 8
+      Height = 195
+      Top = 146
+      Width = 434
+      Anchors = [akTop, akLeft, akRight]
+      Caption = ' Date/Time Conversions '
+      ClientHeight = 175
+      ClientWidth = 430
+      TabOrder = 1
+      object lblLocalDateTime: TLabel
+        Left = 12
+        Height = 15
+        Top = 10
+        Width = 105
+        Caption = 'Local DateTime:'
+      end
+      object edtLocalDateTime: TEdit
+        Left = 12
+        Height = 28
+        Top = 28
+        Width = 300
+        Anchors = [akTop, akLeft, akRight]
+        TabOrder = 0
+      end
+      object btnConvertLocalToIso: TButton
+        Left = 320
+        Height = 28
+        Top = 28
+        Width = 100
+        Anchors = [akTop, akRight]
+        Caption = 'To ISO UTC'
+        TabOrder = 1
+        OnClick = btnConvertLocalToIsoClick
+      end
+      object lblIsoUtc: TLabel
+        Left = 12
+        Height = 15
+        Top = 62
+        Width = 93
+        Caption = 'ISO 8601 UTC:'
+      end
+      object edtIsoUtc: TEdit
+        Left = 12
+        Height = 28
+        Top = 80
+        Width = 300
+        Anchors = [akTop, akLeft, akRight]
+        TabOrder = 2
+      end
+      object btnConvertIsoToLocal: TButton
+        Left = 320
+        Height = 28
+        Top = 80
+        Width = 100
+        Anchors = [akTop, akRight]
+        Caption = 'To Local'
+        TabOrder = 3
+        OnClick = btnConvertIsoToLocalClick
+      end
+      object lblUnixTimestamp: TLabel
+        Left = 12
+        Height = 15
+        Top = 114
+        Width = 100
+        Caption = 'Unix Timestamp:'
+      end
+      object edtUnixTimestamp: TEdit
+        Left = 12
+        Height = 28
+        Top = 132
+        Width = 190
+        Anchors = [akTop, akLeft, akRight]
+        TabOrder = 4
+      end
+      object btnConvertToUnix: TButton
+        Left = 210
+        Height = 28
+        Top = 132
+        Width = 100
+        Anchors = [akTop, akRight]
+        Caption = 'ISO to Unix'
+        TabOrder = 5
+        OnClick = btnConvertToUnixClick
+      end
+      object btnConvertFromUnix: TButton
+        Left = 320
+        Height = 28
+        Top = 132
+        Width = 100
+        Anchors = [akTop, akRight]
+        Caption = 'Unix to ISO'
+        TabOrder = 6
+        OnClick = btnConvertFromUnixClick
+      end
+    end
+    object gbCustomFormat: TGroupBox
+      Left = 8
+      Height = 110
+      Top = 349
+      Width = 434
+      Anchors = [akTop, akLeft, akRight]
+      Caption = ' Custom Format Conversion '
+      ClientHeight = 90
+      ClientWidth = 430
+      TabOrder = 2
+      object lblCustomFormat: TLabel
+        Left = 12
+        Height = 15
+        Top = 8
+        Width = 95
+        Caption = 'Input format:'
+      end
+      object edtCustomFormat: TEdit
+        Left = 12
+        Height = 28
+        Top = 26
+        Width = 200
+        Anchors = [akTop, akLeft]
+        TabOrder = 0
+        TextHint = 'e.g. dd-mm-yyyy hh:nn:ss.zzz'
+      end
+      object lblCustomDateTime: TLabel
+        Left = 220
+        Height = 15
+        Top = 8
+        Width = 90
+        Caption = 'DateTime value:'
+      end
+      object edtCustomDateTime: TEdit
+        Left = 220
+        Height = 28
+        Top = 26
+        Width = 200
+        Anchors = [akTop, akLeft, akRight]
+        TabOrder = 1
+        TextHint = 'e.g. 25-01-2026 17:30:00.000'
+      end
+      object btnConvertCustomToUtc: TButton
+        Left = 12
+        Height = 28
+        Top = 58
+        Width = 408
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'Convert to ISO UTC'
+        TabOrder = 2
+        OnClick = btnConvertCustomToUtcClick
+      end
+    end
+    object gbValidation: TGroupBox
+      Left = 8
+      Height = 95
+      Top = 467
+      Width = 434
+      Anchors = [akTop, akLeft, akRight]
+      Caption = ' Format Validation '
+      ClientHeight = 75
+      ClientWidth = 430
+      TabOrder = 3
+      object lblValidateInput: TLabel
+        Left = 12
+        Height = 15
+        Top = 8
+        Width = 109
+        Caption = 'String to validate:'
+      end
+      object edtValidateInput: TEdit
+        Left = 12
+        Height = 28
+        Top = 26
+        Width = 300
+        Anchors = [akTop, akLeft, akRight]
+        TabOrder = 0
+      end
+      object btnValidateFormat: TButton
+        Left = 320
+        Height = 28
+        Top = 26
+        Width = 100
+        Anchors = [akTop, akRight]
+        Caption = 'Validate'
+        TabOrder = 1
+        OnClick = btnValidateFormatClick
+      end
+      object lblValidateResult: TLabel
+        Left = 12
+        Height = 15
+        Top = 56
+        Width = 406
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'Click Validate to check format'
+        Font.Color = clGray
+        ParentFont = False
+      end
+    end
+    object gbParsing: TGroupBox
+      Left = 8
+      Height = 95
+      Top = 570
+      Width = 434
+      Anchors = [akTop, akLeft, akRight]
+      Caption = ' Parse ISO 8601 '
+      ClientHeight = 75
+      ClientWidth = 430
+      TabOrder = 4
+      object lblParseInput: TLabel
+        Left = 12
+        Height = 15
+        Top = 8
+        Width = 99
+        Caption = 'ISO 8601 string:'
+      end
+      object edtParseInput: TEdit
+        Left = 12
+        Height = 28
+        Top = 26
+        Width = 300
+        Anchors = [akTop, akLeft, akRight]
+        TabOrder = 0
+      end
+      object btnParseIso: TButton
+        Left = 320
+        Height = 28
+        Top = 26
+        Width = 100
+        Anchors = [akTop, akRight]
+        Caption = 'Parse'
+        TabOrder = 1
+        OnClick = btnParseIsoClick
+      end
+      object lblParseResult: TLabel
+        Left = 12
+        Height = 15
+        Top = 56
+        Width = 406
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'Click Parse to analyze the string'
+        Font.Color = clGray
+        ParentFont = False
+      end
+    end
+    object btnClearLog: TButton
+      Left = 8
+      Height = 30
+      Top = 680
+      Width = 434
+      Anchors = [akLeft, akRight, akBottom]
+      Caption = 'Clear Log'
+      TabOrder = 5
+      OnClick = btnClearLogClick
+    end
+  end
+  object Splitter1: TSplitter
+    Left = 450
+    Height = 720
+    Top = 0
+    Width = 5
+  end
+  object pnlRight: TPanel
+    Left = 455
+    Height = 720
+    Top = 0
+    Width = 445
+    Align = alClient
+    BevelOuter = bvNone
+    ClientHeight = 720
+    ClientWidth = 445
+    TabOrder = 1
+    object memoLog: TMemo
+      Left = 8
+      Height = 704
+      Top = 8
+      Width = 429
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      Font.Height = -12
+      Font.Name = 'Monospace'
+      ParentFont = False
+      ReadOnly = True
+      ScrollBars = ssAutoBoth
+      TabOrder = 0
+      WordWrap = False
+    end
+  end
+  object TimerClock: TTimer
+    Enabled = False
+    Interval = 1000
+    OnTimer = TimerClockTimer
+    Left = 400
+    Top = 8
+  end
+end

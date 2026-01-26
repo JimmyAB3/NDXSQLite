@@ -1,0 +1,146 @@
+object frmMain: TfrmMain
+  Left = 200
+  Height = 600
+  Top = 100
+  Width = 900
+  Caption = 'NDXSQLite - Master/Detail Demo'
+  ClientHeight = 600
+  ClientWidth = 900
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  Position = poScreenCenter
+  LCLVersion = '3.0.0.0'
+  object pnlTop: TPanel
+    Left = 0
+    Height = 40
+    Top = 0
+    Width = 900
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 40
+    ClientWidth = 900
+    TabOrder = 0
+    object btnRefresh: TButton
+      Left = 8
+      Height = 28
+      Top = 6
+      Width = 80
+      Caption = 'Refresh All'
+      OnClick = btnRefreshClick
+      TabOrder = 0
+    end
+  end
+  object pnlMaster: TPanel
+    Left = 0
+    Height = 250
+    Top = 40
+    Width = 900
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 250
+    ClientWidth = 900
+    TabOrder = 1
+    object lblMaster: TLabel
+      Left = 8
+      Height = 15
+      Top = 8
+      Width = 62
+      Caption = 'Categories'
+      Font.Height = -12
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object DBNavigatorMaster: TDBNavigator
+      Left = 8
+      Height = 28
+      Top = 28
+      Width = 240
+      DataSource = DataSourceMaster
+      TabOrder = 0
+    end
+    object DBGridMaster: TDBGrid
+      Left = 8
+      Height = 180
+      Top = 62
+      Width = 884
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      DataSource = DataSourceMaster
+      Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+      TabOrder = 1
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -12
+      TitleFont.Name = 'default'
+    end
+  end
+  object Splitter1: TSplitter
+    Cursor = crVSplit
+    Left = 0
+    Height = 5
+    Top = 290
+    Width = 900
+    Align = alTop
+    ResizeAnchor = akTop
+  end
+  object pnlDetail: TPanel
+    Left = 0
+    Height = 275
+    Top = 295
+    Width = 900
+    Align = alClient
+    BevelOuter = bvNone
+    ClientHeight = 275
+    ClientWidth = 900
+    TabOrder = 2
+    object lblDetail: TLabel
+      Left = 8
+      Height = 15
+      Top = 8
+      Width = 51
+      Caption = 'Products'
+      Font.Height = -12
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object DBNavigatorDetail: TDBNavigator
+      Left = 8
+      Height = 28
+      Top = 28
+      Width = 240
+      DataSource = DataSourceDetail
+      TabOrder = 0
+    end
+    object DBGridDetail: TDBGrid
+      Left = 8
+      Height = 205
+      Top = 62
+      Width = 884
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      DataSource = DataSourceDetail
+      Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+      TabOrder = 1
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -12
+      TitleFont.Name = 'default'
+    end
+  end
+  object pnlStatus: TPanel
+    Left = 0
+    Height = 30
+    Top = 570
+    Width = 900
+    Align = alBottom
+    Alignment = taLeftJustify
+    BevelOuter = bvLowered
+    Caption = 'Ready'
+    TabOrder = 3
+  end
+  object DataSourceMaster: TDataSource
+    OnDataChange = DataSourceMasterDataChange
+    Left = 800
+    Top = 80
+  end
+  object DataSourceDetail: TDataSource
+    Left = 800
+    Top = 328
+  end
+end

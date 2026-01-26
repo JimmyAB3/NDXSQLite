@@ -1,0 +1,77 @@
+object frmMain: TfrmMain
+  Left = 200
+  Height = 480
+  Top = 150
+  Width = 800
+  Caption = 'NDXSQLite - DBGrid Demo'
+  ClientHeight = 480
+  ClientWidth = 800
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  Position = poScreenCenter
+  LCLVersion = '3.0.0.0'
+  object pnlTop: TPanel
+    Left = 0
+    Height = 50
+    Top = 0
+    Width = 800
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 50
+    ClientWidth = 800
+    TabOrder = 0
+    object DBNavigator1: TDBNavigator
+      Left = 8
+      Height = 30
+      Top = 10
+      Width = 240
+      DataSource = DataSource1
+      TabOrder = 0
+    end
+    object btnRefresh: TButton
+      Left = 260
+      Height = 30
+      Top = 10
+      Width = 80
+      Caption = 'Refresh'
+      OnClick = btnRefreshClick
+      TabOrder = 1
+    end
+    object lblInfo: TLabel
+      Left = 360
+      Height = 15
+      Top = 17
+      Width = 40
+      Caption = 'lblInfo'
+    end
+  end
+  object DBGrid1: TDBGrid
+    Left = 0
+    Height = 400
+    Top = 50
+    Width = 800
+    Align = alClient
+    DataSource = DataSource1
+    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    TabOrder = 1
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -12
+    TitleFont.Name = 'default'
+  end
+  object pnlStatus: TPanel
+    Left = 0
+    Height = 30
+    Top = 450
+    Width = 800
+    Align = alBottom
+    Alignment = taLeftJustify
+    BevelOuter = bvLowered
+    Caption = 'Ready'
+    TabOrder = 2
+  end
+  object DataSource1: TDataSource
+    OnDataChange = DataSource1DataChange
+    Left = 704
+    Top = 8
+  end
+end

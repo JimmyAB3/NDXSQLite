@@ -1,0 +1,167 @@
+object frmMain: TfrmMain
+  Left = 200
+  Height = 600
+  Top = 100
+  Width = 900
+  Caption = 'NDXSQLite - Async Operations with Progress'
+  ClientHeight = 600
+  ClientWidth = 900
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  Position = poScreenCenter
+  LCLVersion = '3.0.0.0'
+  object pnlTop: TPanel
+    Left = 0
+    Height = 50
+    Top = 0
+    Width = 900
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 50
+    ClientWidth = 900
+    TabOrder = 0
+    object lblRecordCount: TLabel
+      Left = 8
+      Height = 15
+      Top = 17
+      Width = 77
+      Caption = 'Records to insert:'
+    end
+    object edtRecordCount: TSpinEdit
+      Left = 104
+      Height = 28
+      Top = 12
+      Width = 80
+      MaxValue = 100000
+      MinValue = 1
+      TabOrder = 0
+      Value = 1000
+    end
+    object btnInsertData: TButton
+      Left = 200
+      Height = 30
+      Top = 10
+      Width = 100
+      Caption = 'Insert Data'
+      OnClick = btnInsertDataClick
+      TabOrder = 1
+    end
+    object btnQueryData: TButton
+      Left = 312
+      Height = 30
+      Top = 10
+      Width = 100
+      Caption = 'Query Data'
+      OnClick = btnQueryDataClick
+      TabOrder = 2
+    end
+    object btnBackup: TButton
+      Left = 424
+      Height = 30
+      Top = 10
+      Width = 100
+      Caption = 'Backup DB'
+      OnClick = btnBackupClick
+      TabOrder = 3
+    end
+    object btnCancel: TButton
+      Left = 536
+      Height = 30
+      Top = 10
+      Width = 100
+      Caption = 'Cancel'
+      Enabled = False
+      OnClick = btnCancelClick
+      TabOrder = 4
+    end
+  end
+  object pnlProgress: TPanel
+    Left = 0
+    Height = 40
+    Top = 50
+    Width = 900
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 40
+    ClientWidth = 900
+    TabOrder = 1
+    object lblProgress: TLabel
+      Left = 8
+      Height = 15
+      Top = 12
+      Width = 60
+      Caption = 'lblProgress'
+    end
+    object ProgressBar1: TProgressBar
+      Left = 200
+      Height = 20
+      Top = 10
+      Width = 692
+      Anchors = [akTop, akLeft, akRight]
+      TabOrder = 0
+    end
+  end
+  object pnlData: TPanel
+    Left = 0
+    Height = 250
+    Top = 90
+    Width = 900
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 250
+    ClientWidth = 900
+    TabOrder = 2
+    object DBGrid1: TDBGrid
+      Left = 0
+      Height = 250
+      Top = 0
+      Width = 900
+      Align = alClient
+      DataSource = DataSource1
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection]
+      ReadOnly = True
+      TabOrder = 0
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -12
+      TitleFont.Name = 'default'
+    end
+  end
+  object Splitter1: TSplitter
+    Cursor = crVSplit
+    Left = 0
+    Height = 5
+    Top = 340
+    Width = 900
+    Align = alTop
+    ResizeAnchor = akTop
+  end
+  object memoLog: TMemo
+    Left = 0
+    Height = 225
+    Top = 345
+    Width = 900
+    Align = alClient
+    Font.Height = -12
+    Font.Name = 'Monospace'
+    ParentFont = False
+    ReadOnly = True
+    ScrollBars = ssVertical
+    TabOrder = 3
+  end
+  object pnlStatus: TPanel
+    Left = 0
+    Height = 30
+    Top = 570
+    Width = 900
+    Align = alBottom
+    Alignment = taLeftJustify
+    BevelOuter = bvLowered
+    Caption = 'Ready'
+    TabOrder = 4
+  end
+  object DataSource1: TDataSource
+    Left = 808
+    Top = 128
+  end
+end

@@ -1,0 +1,285 @@
+object frmMain: TfrmMain
+  Left = 200
+  Height = 650
+  Top = 50
+  Width = 900
+  Caption = 'NDXSQLite Multi-Thread Connection Pool Demo'
+  ClientHeight = 650
+  ClientWidth = 900
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  Position = poScreenCenter
+  LCLVersion = '3.4.0.0'
+  object pnlLeft: TPanel
+    Left = 0
+    Height = 650
+    Top = 0
+    Width = 280
+    Align = alLeft
+    BevelOuter = bvNone
+    ClientHeight = 650
+    ClientWidth = 280
+    TabOrder = 0
+    object gbPoolConfig: TGroupBox
+      Left = 8
+      Height = 100
+      Top = 8
+      Width = 264
+      Anchors = [akTop, akLeft, akRight]
+      Caption = ' Connection Pool '
+      ClientHeight = 80
+      ClientWidth = 260
+      TabOrder = 0
+      object lblMinConnections: TLabel
+        Left = 12
+        Height = 15
+        Top = 12
+        Width = 98
+        Caption = 'Min connections:'
+      end
+      object spnMinConnections: TSpinEdit
+        Left = 160
+        Height = 28
+        Top = 8
+        Width = 88
+        Anchors = [akTop, akRight]
+        MaxValue = 10
+        MinValue = 1
+        TabOrder = 0
+        Value = 2
+      end
+      object lblMaxConnections: TLabel
+        Left = 12
+        Height = 15
+        Top = 48
+        Width = 101
+        Caption = 'Max connections:'
+      end
+      object spnMaxConnections: TSpinEdit
+        Left = 160
+        Height = 28
+        Top = 44
+        Width = 88
+        Anchors = [akTop, akRight]
+        MaxValue = 20
+        MinValue = 1
+        TabOrder = 1
+        Value = 4
+      end
+    end
+    object gbWorkerConfig: TGroupBox
+      Left = 8
+      Height = 100
+      Top = 116
+      Width = 264
+      Anchors = [akTop, akLeft, akRight]
+      Caption = ' Worker Threads '
+      ClientHeight = 80
+      ClientWidth = 260
+      TabOrder = 1
+      object lblThreadCount: TLabel
+        Left = 12
+        Height = 15
+        Top = 12
+        Width = 77
+        Caption = 'Thread count:'
+      end
+      object spnThreadCount: TSpinEdit
+        Left = 160
+        Height = 28
+        Top = 8
+        Width = 88
+        Anchors = [akTop, akRight]
+        MaxValue = 4
+        MinValue = 1
+        TabOrder = 0
+        Value = 4
+      end
+      object lblOperationsPerThread: TLabel
+        Left = 12
+        Height = 15
+        Top = 48
+        Width = 127
+        Caption = 'Operations per thread:'
+      end
+      object spnOperationsPerThread: TSpinEdit
+        Left = 160
+        Height = 28
+        Top = 44
+        Width = 88
+        Anchors = [akTop, akRight]
+        Increment = 10
+        MaxValue = 1000
+        MinValue = 10
+        TabOrder = 1
+        Value = 100
+      end
+    end
+    object btnInitDatabase: TButton
+      Left = 8
+      Height = 35
+      Top = 230
+      Width = 264
+      Anchors = [akTop, akLeft, akRight]
+      Caption = 'Initialize Database'
+      TabOrder = 2
+      OnClick = btnInitDatabaseClick
+    end
+    object btnStartWorkers: TButton
+      Left = 8
+      Height = 35
+      Top = 273
+      Width = 264
+      Anchors = [akTop, akLeft, akRight]
+      Caption = 'Start Workers'
+      Enabled = False
+      TabOrder = 3
+      OnClick = btnStartWorkersClick
+    end
+    object btnStopWorkers: TButton
+      Left = 8
+      Height = 35
+      Top = 316
+      Width = 264
+      Anchors = [akTop, akLeft, akRight]
+      Caption = 'Stop Workers'
+      Enabled = False
+      TabOrder = 4
+      OnClick = btnStopWorkersClick
+    end
+    object gbProgress: TGroupBox
+      Left = 8
+      Height = 200
+      Top = 370
+      Width = 264
+      Anchors = [akTop, akLeft, akRight]
+      Caption = ' Thread Progress '
+      ClientHeight = 180
+      ClientWidth = 260
+      TabOrder = 5
+      object lblThread1: TLabel
+        Left = 12
+        Height = 15
+        Top = 8
+        Width = 236
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'Thread 1: Idle'
+      end
+      object ProgressBar1: TProgressBar
+        Left = 12
+        Height = 20
+        Top = 26
+        Width = 236
+        Anchors = [akTop, akLeft, akRight]
+        TabOrder = 0
+      end
+      object lblThread2: TLabel
+        Left = 12
+        Height = 15
+        Top = 52
+        Width = 236
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'Thread 2: Idle'
+      end
+      object ProgressBar2: TProgressBar
+        Left = 12
+        Height = 20
+        Top = 70
+        Width = 236
+        Anchors = [akTop, akLeft, akRight]
+        TabOrder = 1
+      end
+      object lblThread3: TLabel
+        Left = 12
+        Height = 15
+        Top = 96
+        Width = 236
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'Thread 3: Idle'
+      end
+      object ProgressBar3: TProgressBar
+        Left = 12
+        Height = 20
+        Top = 114
+        Width = 236
+        Anchors = [akTop, akLeft, akRight]
+        TabOrder = 2
+      end
+      object lblThread4: TLabel
+        Left = 12
+        Height = 15
+        Top = 140
+        Width = 236
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'Thread 4: Idle'
+      end
+      object ProgressBar4: TProgressBar
+        Left = 12
+        Height = 20
+        Top = 158
+        Width = 236
+        Anchors = [akTop, akLeft, akRight]
+        TabOrder = 3
+      end
+    end
+    object lblPoolStatus: TLabel
+      Left = 8
+      Height = 15
+      Top = 580
+      Width = 264
+      Anchors = [akLeft, akRight, akBottom]
+      Caption = 'Pool: Not initialized'
+      Font.Height = -12
+      ParentFont = False
+    end
+    object btnClearLog: TButton
+      Left = 8
+      Height = 30
+      Top = 612
+      Width = 264
+      Anchors = [akLeft, akRight, akBottom]
+      Caption = 'Clear Log'
+      TabOrder = 6
+      OnClick = btnClearLogClick
+    end
+  end
+  object Splitter1: TSplitter
+    Left = 280
+    Height = 650
+    Top = 0
+    Width = 5
+  end
+  object pnlRight: TPanel
+    Left = 285
+    Height = 650
+    Top = 0
+    Width = 615
+    Align = alClient
+    BevelOuter = bvNone
+    ClientHeight = 650
+    ClientWidth = 615
+    TabOrder = 1
+    object memoLog: TMemo
+      Left = 8
+      Height = 634
+      Top = 8
+      Width = 599
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      Font.Height = -12
+      Font.Name = 'Monospace'
+      ParentFont = False
+      ReadOnly = True
+      ScrollBars = ssAutoBoth
+      TabOrder = 0
+      WordWrap = False
+    end
+  end
+  object TimerStatus: TTimer
+    Enabled = False
+    Interval = 500
+    OnTimer = TimerStatusTimer
+    Left = 360
+    Top = 100
+  end
+end

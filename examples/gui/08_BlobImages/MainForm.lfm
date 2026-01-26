@@ -1,0 +1,274 @@
+object frmMain: TfrmMain
+  Left = 200
+  Height = 700
+  Top = 50
+  Width = 1000
+  Caption = 'NDXSQLite BLOB and Image Management Demo'
+  ClientHeight = 700
+  ClientWidth = 1000
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  Position = poScreenCenter
+  LCLVersion = '3.4.0.0'
+  object pnlLeft: TPanel
+    Left = 0
+    Height = 700
+    Top = 0
+    Width = 350
+    Align = alLeft
+    BevelOuter = bvNone
+    ClientHeight = 700
+    ClientWidth = 350
+    TabOrder = 0
+    object gbImagePreview: TGroupBox
+      Left = 8
+      Height = 280
+      Top = 8
+      Width = 334
+      Anchors = [akTop, akLeft, akRight]
+      Caption = ' Image Preview '
+      ClientHeight = 260
+      ClientWidth = 330
+      TabOrder = 0
+      object DBImage1: TDBImage
+        Left = 8
+        Height = 244
+        Top = 8
+        Width = 314
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        Proportional = True
+        Stretch = True
+      end
+    end
+    object gbFileInfo: TGroupBox
+      Left = 8
+      Height = 90
+      Top = 296
+      Width = 334
+      Anchors = [akTop, akLeft, akRight]
+      Caption = ' File Information '
+      ClientHeight = 70
+      ClientWidth = 330
+      TabOrder = 1
+      object lblFileName: TLabel
+        Left = 12
+        Height = 15
+        Top = 8
+        Width = 306
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'File: (no file)'
+      end
+      object lblFileType: TLabel
+        Left = 12
+        Height = 15
+        Top = 28
+        Width = 140
+        Caption = 'Type: -'
+      end
+      object lblFileSize: TLabel
+        Left = 170
+        Height = 15
+        Top = 28
+        Width = 148
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'Size: -'
+      end
+    end
+    object gbControls: TGroupBox
+      Left = 8
+      Height = 200
+      Top = 394
+      Width = 334
+      Anchors = [akTop, akLeft, akRight]
+      Caption = ' Controls '
+      ClientHeight = 180
+      ClientWidth = 330
+      TabOrder = 2
+      object lblTitle: TLabel
+        Left = 12
+        Height = 15
+        Top = 8
+        Width = 25
+        Caption = 'Title:'
+      end
+      object edtTitle: TEdit
+        Left = 12
+        Height = 28
+        Top = 26
+        Width = 306
+        Anchors = [akTop, akLeft, akRight]
+        TabOrder = 0
+      end
+      object lblDescription: TLabel
+        Left = 12
+        Height = 15
+        Top = 58
+        Width = 64
+        Caption = 'Description:'
+      end
+      object edtDescription: TEdit
+        Left = 12
+        Height = 28
+        Top = 76
+        Width = 306
+        Anchors = [akTop, akLeft, akRight]
+        TabOrder = 1
+      end
+      object btnLoadImage: TButton
+        Left = 12
+        Height = 28
+        Top = 112
+        Width = 100
+        Caption = 'Load Image'
+        TabOrder = 2
+        OnClick = btnLoadImageClick
+      end
+      object btnSaveImage: TButton
+        Left = 118
+        Height = 28
+        Top = 112
+        Width = 100
+        Caption = 'Save Image'
+        Enabled = False
+        TabOrder = 3
+        OnClick = btnSaveImageClick
+      end
+      object btnClearImage: TButton
+        Left = 224
+        Height = 28
+        Top = 112
+        Width = 94
+        Anchors = [akTop, akRight]
+        Caption = 'Clear'
+        Enabled = False
+        TabOrder = 4
+        OnClick = btnClearImageClick
+      end
+      object btnLoadFile: TButton
+        Left = 12
+        Height = 28
+        Top = 146
+        Width = 100
+        Caption = 'Load Any File'
+        TabOrder = 5
+        OnClick = btnLoadFileClick
+      end
+      object btnSaveFile: TButton
+        Left = 118
+        Height = 28
+        Top = 146
+        Width = 100
+        Caption = 'Save As File'
+        Enabled = False
+        TabOrder = 6
+        OnClick = btnSaveFileClick
+      end
+      object btnRefresh: TButton
+        Left = 224
+        Height = 28
+        Top = 146
+        Width = 94
+        Anchors = [akTop, akRight]
+        Caption = 'Refresh'
+        TabOrder = 7
+        OnClick = btnRefreshClick
+      end
+    end
+    object btnClearLog: TButton
+      Left = 8
+      Height = 30
+      Top = 662
+      Width = 334
+      Anchors = [akLeft, akRight, akBottom]
+      Caption = 'Clear Log'
+      TabOrder = 3
+      OnClick = btnClearLogClick
+    end
+  end
+  object Splitter1: TSplitter
+    Left = 350
+    Height = 700
+    Top = 0
+    Width = 5
+  end
+  object pnlRight: TPanel
+    Left = 355
+    Height = 700
+    Top = 0
+    Width = 645
+    Align = alClient
+    BevelOuter = bvNone
+    ClientHeight = 700
+    ClientWidth = 645
+    TabOrder = 1
+    object DBGrid1: TDBGrid
+      Left = 8
+      Height = 200
+      Top = 8
+      Width = 629
+      Anchors = [akTop, akLeft, akRight]
+      DataSource = DataSource1
+      TabOrder = 0
+      TitleFont.Height = -12
+      TitleFont.Name = 'Sans'
+    end
+    object DBNavigator1: TDBNavigator
+      Left = 8
+      Height = 30
+      Top = 216
+      Width = 629
+      Anchors = [akTop, akLeft, akRight]
+      DataSource = DataSource1
+      TabOrder = 1
+    end
+    object memoLog: TMemo
+      Left = 8
+      Height = 410
+      Top = 254
+      Width = 629
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      Font.Height = -12
+      Font.Name = 'Monospace'
+      ParentFont = False
+      ReadOnly = True
+      ScrollBars = ssAutoBoth
+      TabOrder = 2
+      WordWrap = False
+    end
+    object pnlStatus: TPanel
+      Left = 0
+      Height = 28
+      Top = 672
+      Width = 645
+      Align = alBottom
+      BevelOuter = bvLowered
+      TabOrder = 3
+    end
+  end
+  object DataSource1: TDataSource
+    OnDataChange = DataSource1DataChange
+    Left = 450
+    Top = 120
+  end
+  object OpenPictureDialog1: TOpenPictureDialog
+    Title = 'Select an image to load'
+    Left = 480
+    Top = 120
+  end
+  object SavePictureDialog1: TSavePictureDialog
+    Title = 'Save image as'
+    Left = 510
+    Top = 120
+  end
+  object OpenDialog1: TOpenDialog
+    Title = 'Select a file to load'
+    Left = 540
+    Top = 120
+  end
+  object SaveDialog1: TSaveDialog
+    Title = 'Save file as'
+    Left = 570
+    Top = 120
+  end
+end
