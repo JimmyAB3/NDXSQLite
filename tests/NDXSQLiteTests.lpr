@@ -13866,15 +13866,15 @@ var
 begin
   StartTest('Invalid/inaccessible paths');
   try
-    // Test paths that should fail on open
+    // Test paths that should fail on open or query
     // Note: Path traversal protection is the responsibility of the application
     // Here we verify that invalid/inaccessible paths fail
     {$IFDEF WINDOWS}
     SetLength(TraversalPaths, 4);
     TraversalPaths[0] := 'Z:\nonexistent_drive_xyz\test.db';  // Non-existent drive
-    TraversalPaths[1] := 'C:\Windows\System32\config\test.db'; // Protected system dir
-    TraversalPaths[2] := '';                                    // Empty path
-    TraversalPaths[3] := 'CON:\test.db';                       // Invalid device name
+    TraversalPaths[1] := '\\?\InvalidPath\test.db';           // Invalid UNC path
+    TraversalPaths[2] := '';                                   // Empty path
+    TraversalPaths[3] := #0 + 'test.db';                      // Null char in path
     {$ELSE}
     SetLength(TraversalPaths, 4);
     TraversalPaths[0] := '/nonexistent_dir_xyz/test.db';  // Non-existent dir
@@ -13896,6 +13896,8 @@ begin
           Conn := TNDXSQLiteConnection.Create(Opts);
           try
             Conn.Open;
+            // Force actual database access - SQLite may delay validation
+            Conn.ExecuteScalar('SELECT 1');
             Conn.Close;
           finally
             Conn.Free;
