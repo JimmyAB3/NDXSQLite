@@ -1,0 +1,203 @@
+# ===============================================================================
+# NDXSQLite .gitignore
+# Free Pascal / Lazarus Project
+# ===============================================================================
+
+# ------------------------------------------------------------------------------
+# Compiled Units
+# ------------------------------------------------------------------------------
+*.o
+*.ppu
+*.rst
+*.rsj
+*.compiled
+*.or
+*.res
+
+# ------------------------------------------------------------------------------
+# Lazarus Project Files (auto-generated)
+# ------------------------------------------------------------------------------
+*.lps
+*.lrt
+lib/
+backup/
+
+# ------------------------------------------------------------------------------
+# Executables
+# ------------------------------------------------------------------------------
+# Linux/macOS executables (no extension)
+# Note: Listed explicitly to avoid ignoring intentional files
+
+# Windows executables
+*.exe
+*.dll
+
+# macOS
+*.dylib
+*.app/
+
+# Linux shared libraries
+*.so
+*.so.*
+
+# ------------------------------------------------------------------------------
+# Test and Example Outputs
+# ------------------------------------------------------------------------------
+
+# Test databases
+tests/*.db
+tests/*.db-journal
+tests/*.db-wal
+tests/*.db-shm
+tests/*.log
+
+# Example databases
+examples/**/*.db
+examples/**/*.db-journal
+examples/**/*.db-wal
+examples/**/*.db-shm
+
+# Backup files created by examples
+*.bak
+*.backup
+
+# CSV/SQL exports from examples
+examples/**/*.csv
+examples/**/*.sql
+
+# ------------------------------------------------------------------------------
+# Lazarus Backup Files
+# ------------------------------------------------------------------------------
+*~
+*.bak
+*.orig
+*.~*
+
+# Lazarus session files
+*.lps
+
+# ------------------------------------------------------------------------------
+# IDE and Editor Files
+# ------------------------------------------------------------------------------
+
+# Lazarus
+*.lrt
+heaptrc.trc
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# JetBrains IDEs
+.idea/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+.*.swp
+
+# Emacs
+*~
+\#*\#
+.#*
+
+# ------------------------------------------------------------------------------
+# Operating System Files
+# ------------------------------------------------------------------------------
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# ------------------------------------------------------------------------------
+# Build Directories
+# ------------------------------------------------------------------------------
+lib/
+bin/
+out/
+build/
+output/
+
+# Platform-specific build outputs
+lib/x86_64-linux/
+lib/x86_64-win64/
+lib/x86_64-darwin/
+lib/i386-win32/
+lib/aarch64-linux/
+lib/aarch64-darwin/
+
+# ------------------------------------------------------------------------------
+# Temporary Files
+# ------------------------------------------------------------------------------
+*.tmp
+*.temp
+*.log
+*.cache
+
+# ------------------------------------------------------------------------------
+# SQLite/SQLCipher Runtime Files
+# ------------------------------------------------------------------------------
+*.db-journal
+*.db-wal
+*.db-shm
+
+# ------------------------------------------------------------------------------
+# Documentation Build Output
+# ------------------------------------------------------------------------------
+docs/_build/
+docs/html/
+docs/latex/
+docs/pdf/
+
+# ------------------------------------------------------------------------------
+# Package Manager
+# ------------------------------------------------------------------------------
+packages/
+*.lpk.compiled
+
+# ------------------------------------------------------------------------------
+# CI/CD Artifacts
+# ------------------------------------------------------------------------------
+.github/artifacts/
+coverage/
+test-results/
+
+# ------------------------------------------------------------------------------
+# Sensitive Files (Never Commit)
+# ------------------------------------------------------------------------------
+*.pem
+*.key
+*.env
+.env.*
+credentials.json
+secrets.json
+
+# ------------------------------------------------------------------------------
+# Keep These (Override)
+# ------------------------------------------------------------------------------
+# Uncomment if needed:
+# !lib/.gitkeep
+# !bin/.gitkeep
