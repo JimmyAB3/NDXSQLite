@@ -12,6 +12,9 @@ on:
     branches: [ main, master, develop ]
   workflow_dispatch:  # Manual trigger
 
+permissions:
+  contents: write  # Required for creating releases
+
 env:
   LAZARUS_VERSION: stable
   SQLITE_VERSION: '3450100'  # 3.45.1
