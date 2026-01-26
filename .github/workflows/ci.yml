@@ -1,0 +1,261 @@
+# NDXSQLite CI/CD Pipeline
+# Builds and tests on Linux, Windows and macOS
+
+name: CI
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+  workflow_dispatch:  # Manual trigger
+
+env:
+  LAZARUS_VERSION: stable
+  SQLITE_VERSION: '3450100'  # 3.45.1
+
+jobs:
+  build-and-test:
+    name: Build & Test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        include:
+          - os: ubuntu-latest
+            platform: linux
+          - os: windows-latest
+            platform: windows
+          - os: macos-latest
+            platform: macos
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ========== Dependencies ==========
+      - name: Install dependencies (Linux)
+        if: matrix.platform == 'linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libsqlite3-0 \
+            libsqlite3-dev \
+            libgtk2.0-0 \
+            libgtk2.0-dev
+
+      - name: Install dependencies (Windows)
+        if: matrix.platform == 'windows'
+        shell: bash
+        run: |
+          echo "Downloading SQLite DLL..."
+          curl -fsSL "https://www.sqlite.org/2024/sqlite-dll-win-x64-${SQLITE_VERSION}.zip" -o sqlite.zip
+          unzip -o sqlite.zip -d tests/
+          cp tests/sqlite3.dll .
+          echo "SQLite DLL installed:"
+          ls -la tests/sqlite3.dll
+
+      - name: Check SQLite (macOS)
+        if: matrix.platform == 'macos'
+        run: |
+          echo "System SQLite version:"
+          sqlite3 --version
+
+      # ========== Lazarus Setup ==========
+      - name: Setup Lazarus
+        uses: gcarreno/setup-lazarus@v3
+        with:
+          lazarus-version: ${{ env.LAZARUS_VERSION }}
+
+      - name: Install NDXSQLite package
+        shell: bash
+        run: lazbuild --add-package-link=src/NDXSQLite.lpk
+
+      # ========== Build Tests ==========
+      - name: Build tests
+        shell: bash
+        run: |
+          cd tests
+          echo "=== Compiling NDXSQLiteTests ==="
+          lazbuild NDXSQLiteTests.lpi
+          echo ""
+          echo "=== Compiling NDXSQLiteAdvancedTests ==="
+          lazbuild NDXSQLiteAdvancedTests.lpi
+          echo ""
+          echo "=== Compiling DateTimeUtilsTests ==="
+          lazbuild DateTimeUtilsTests.lpi
+          echo ""
+          echo "=== Compiling DateTimeUtilsFunctionalTests ==="
+          lazbuild DateTimeUtilsFunctionalTests.lpi
+          echo ""
+          echo "=== Compiling SQLCipherTests ==="
+          lazbuild SQLCipherTests.lpi
+
+      # ========== Run Tests ==========
+      - name: Run tests (Unix)
+        if: matrix.platform != 'windows'
+        run: |
+          cd tests
+          echo "=== NDXSQLiteTests ===" && ./NDXSQLiteTests
+          echo "=== NDXSQLiteAdvancedTests ===" && ./NDXSQLiteAdvancedTests
+          echo "=== DateTimeUtilsTests ===" && ./DateTimeUtilsTests --all --format=plain
+          echo "=== DateTimeUtilsFunctionalTests ===" && ./DateTimeUtilsFunctionalTests --all --format=plain
+          echo "=== SQLCipherTests (basic - SQLCipher not installed) ===" && ./SQLCipherTests
+
+      - name: Run tests (Windows)
+        if: matrix.platform == 'windows'
+        shell: bash
+        run: |
+          cd tests
+          echo "=== NDXSQLiteTests ===" && ./NDXSQLiteTests.exe
+          echo "=== NDXSQLiteAdvancedTests ===" && ./NDXSQLiteAdvancedTests.exe
+          echo "=== DateTimeUtilsTests ===" && ./DateTimeUtilsTests.exe --all --format=plain
+          echo "=== DateTimeUtilsFunctionalTests ===" && ./DateTimeUtilsFunctionalTests.exe --all --format=plain
+          echo "=== SQLCipherTests (basic - SQLCipher not installed) ===" && ./SQLCipherTests.exe
+
+      - name: Upload test artifacts on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-logs-${{ matrix.platform }}
+          path: |
+            tests/*.db
+            tests/*.log
+          retention-days: 7
+
+  # SQLCipher encryption tests (Linux only - easy to install)
+  test-sqlcipher:
+    name: SQLCipher Tests (Linux)
+    runs-on: ubuntu-latest
+    needs: build-and-test
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install SQLCipher
+        run: |
+          sudo apt-get update
+          # Try libsqlcipher1 first (Ubuntu 22.04+), fallback to libsqlcipher0
+          sudo apt-get install -y \
+            libsqlcipher1 libsqlcipher-dev \
+            libgtk2.0-0 libgtk2.0-dev \
+            || sudo apt-get install -y \
+            libsqlcipher0 libsqlcipher-dev \
+            libgtk2.0-0 libgtk2.0-dev
+          echo "SQLCipher library:"
+          ls -la /usr/lib/x86_64-linux-gnu/libsqlcipher* || true
+          sqlcipher --version || echo "sqlcipher CLI not available"
+
+      - name: Setup Lazarus
+        uses: gcarreno/setup-lazarus@v3
+        with:
+          lazarus-version: ${{ env.LAZARUS_VERSION }}
+
+      - name: Install NDXSQLite package
+        shell: bash
+        run: lazbuild --add-package-link=src/NDXSQLite.lpk
+
+      - name: Build SQLCipher tests
+        shell: bash
+        run: |
+          cd tests
+          lazbuild SQLCipherTests.lpi
+
+      - name: Run SQLCipher tests
+        run: |
+          cd tests
+          echo "=== SQLCipherTests (with SQLCipher library) ==="
+          # Library search order now prioritizes SQLCipher automatically
+          ./SQLCipherTests
+
+  # Build examples to ensure they compile
+  build-examples:
+    name: Build Examples (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    needs: build-and-test
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        include:
+          - os: ubuntu-latest
+            platform: linux
+          - os: windows-latest
+            platform: windows
+          - os: macos-latest
+            platform: macos
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies (Linux)
+        if: matrix.platform == 'linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libsqlite3-0 libsqlite3-dev
+
+      - name: Install dependencies (Windows)
+        if: matrix.platform == 'windows'
+        shell: bash
+        run: |
+          curl -fsSL "https://www.sqlite.org/2024/sqlite-dll-win-x64-${SQLITE_VERSION}.zip" -o sqlite.zip
+          unzip -o sqlite.zip -d .
+
+      - name: Setup Lazarus
+        uses: gcarreno/setup-lazarus@v3
+        with:
+          lazarus-version: ${{ env.LAZARUS_VERSION }}
+
+      - name: Install NDXSQLite package
+        shell: bash
+        run: lazbuild --add-package-link=src/NDXSQLite.lpk
+
+      - name: Build console examples
+        shell: bash
+        run: |
+          echo "Building console examples..."
+          failed=0
+          total=0
+          for lpi in $(find examples/console -name "*.lpi" -type f); do
+            total=$((total + 1))
+            echo "  Building: $lpi"
+            if lazbuild "$lpi" > /dev/null 2>&1; then
+              echo "    OK"
+            else
+              echo "    FAILED"
+              failed=$((failed + 1))
+            fi
+          done
+          echo ""
+          echo "Build complete: $((total - failed))/$total succeeded"
+          if [ $failed -gt 0 ]; then
+            echo "Warning: $failed examples failed to build"
+          fi
+
+  # Release job - triggered on version tags
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    needs: [build-and-test, build-examples]
+    if: startsWith(github.ref, 'refs/tags/v')
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Extract version from tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: NDXSQLite v${{ steps.version.outputs.VERSION }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
