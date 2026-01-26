@@ -70,7 +70,7 @@ jobs:
 
       - name: Install NDXSQLite package
         shell: bash
-        run: lazbuild --add-package-link=src/NDXSQLite.lpk
+        run: lazbuild --add-package-link src/NDXSQLite.lpk
 
       # ========== Build Tests ==========
       - name: Build tests
@@ -155,7 +155,7 @@ jobs:
 
       - name: Install NDXSQLite package
         shell: bash
-        run: lazbuild --add-package-link=src/NDXSQLite.lpk
+        run: lazbuild --add-package-link src/NDXSQLite.lpk
 
       - name: Build SQLCipher tests
         shell: bash
@@ -211,7 +211,7 @@ jobs:
 
       - name: Install NDXSQLite package
         shell: bash
-        run: lazbuild --add-package-link=src/NDXSQLite.lpk
+        run: lazbuild --add-package-link src/NDXSQLite.lpk
 
       - name: Build console examples
         shell: bash
